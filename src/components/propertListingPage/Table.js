@@ -2,6 +2,7 @@ import axios from "axios";
 import Image from "./Image";
 import React, { useEffect, useState } from "react";
 import { BsImageFill } from "react-icons/bs";
+import { BsFillEyeFill } from "react-icons/bs";
 import { MdModeEditOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 function Table() {
@@ -104,8 +105,28 @@ function Table() {
                       <button className="soldbtn">{d.status}</button>
                     </th>
                     <th scope="col">{d.daysLeft}</th>
-                    <th scope="col">
-                      <MdModeEditOutline />
+                    <th
+                      scope="col"
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                      }}
+                    >
+                      <span
+                        onClick={() => {
+                          navigate("/viewPage", { state: d });
+                        }}
+                      >
+                        {" "}
+                        <BsFillEyeFill />
+                      </span>
+                      <span
+                        onClick={() => {
+                          navigate("/viewPage", { state: d });
+                        }}
+                      >
+                        <MdModeEditOutline />
+                      </span>
                     </th>
                   </tr>
                 );
