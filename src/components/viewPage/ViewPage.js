@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { RiArrowGoBackLine } from "react-icons/ri";
+
 function ViewPage() {
   const location = useLocation();
   const tableDetails = location.state;
@@ -7,9 +9,29 @@ function ViewPage() {
   const active = "#17a2b8";
   const normal = "";
   const [page, setPage] = useState(1);
+  const navigate = useNavigate();
   useEffect(() => {}, [page]);
   return (
     <div className="container" style={{ padding: "25px" }}>
+      <div style={{ display: "flex" }}>
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="btn btn-info"
+          style={{
+            fontSize: "larger",
+
+            alignItems: "center",
+            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            justifyContent: "center",
+            borderRadius: "35px",
+          }}
+        >
+          <RiArrowGoBackLine />
+
+          <span className="ms-1 d-none d-sm-inline">Back</span>
+        </button>
+      </div>
       <h1>Property and Owner Details</h1>
       <table
         style={{ marginTop: "15px" }}
