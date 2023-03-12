@@ -6,6 +6,7 @@ import Profile from "./components/Authentication/Profile";
 import Register from "./components/Authentication/Register";
 import AddProperty from "./components/Add Property/AddProperty";
 import Protected from "./Protected";
+import ViewPage from "./components/viewPage/ViewPage";
 
 function App() {
   return (
@@ -34,6 +35,14 @@ function App() {
           element={
             <Protected>
               <Profile />
+            </Protected>
+          }
+        />
+        <Route
+          path="/viewPage"
+          element={
+            <Protected>
+              <ViewPage />
             </Protected>
           }
         />
