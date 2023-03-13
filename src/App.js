@@ -7,6 +7,7 @@ import Register from "./components/Authentication/Register";
 import AddProperty from "./components/Add Property/AddProperty";
 import Protected from "./Protected";
 import ViewPage from "./components/viewPage/ViewPage";
+import Update from "./components/updateProperty/Update";
 
 function App() {
   return (
@@ -43,6 +44,14 @@ function App() {
           element={
             <Protected>
               <ViewPage />
+            </Protected>
+          }
+        />
+        <Route
+          path="/update"
+          element={
+            <Protected>
+              <Update />
             </Protected>
           }
         />

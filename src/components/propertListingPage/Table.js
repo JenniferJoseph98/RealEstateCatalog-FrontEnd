@@ -122,7 +122,7 @@ function Table() {
                       </span>
                       <span
                         onClick={() => {
-                          navigate("/viewPage", { state: d });
+                          navigate("/update", { state: d });
                         }}
                       >
                         <MdModeEditOutline />
