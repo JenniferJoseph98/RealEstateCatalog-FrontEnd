@@ -7,6 +7,8 @@ function LocationInfo({
   HandleFormData,
   values,
   insertImages,
+  status,
+  propertyID,
 }) {
   useEffect(() => console.log(values), [values]);
 
@@ -30,20 +32,35 @@ function LocationInfo({
     let url = "https://real-estate-catalog-back-end.vercel.app/api/property";
     // console.log(id);
     console.log(formData);
-    axios
-      .post(url, values, {
-        headers: {
-          token: token,
-          id: id,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        navigate("/common");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (status === "add") {
+      axios
+        .post(url, values, {
+          headers: {
+            token: token,
+            id: id,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          navigate("/common");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axios
+        .put(`${url}/update/${propertyID}`, values, {
+          headers: {
+            token: token,
+            id: id,
+          },
+        })
+        .then((res) => {
+          alert("Updated successfully");
+          navigate("/common");
+        })
+        .catch((err) => alert("Unable to update"));
+    }
 
     nextStep();
   };

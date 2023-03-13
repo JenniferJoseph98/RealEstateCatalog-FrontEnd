@@ -2,7 +2,14 @@ import React, { useEffect } from "react";
 import { AiFillCamera } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 
-function GeneralInfo({ nextStep, addImage, prevStep, HandleFormData, values }) {
+function GeneralInfo({
+  nextStep,
+  addImage,
+  prevStep,
+  HandleFormData,
+  values,
+  status,
+}) {
   useEffect(() => console.log(values), [values]);
   const {
     register,
@@ -182,36 +189,38 @@ function GeneralInfo({ nextStep, addImage, prevStep, HandleFormData, values }) {
       <div className="row" style={{ marginTop: "10px" }}>
         <div className="col error">{errors.age && errors.age.message}</div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          // justifyContent: "center",
-        }}
-      >
+      {status !== "update" && (
         <div
-          className="upload"
           style={{
-            marginTop: "10px",
-            fontSize: "25px",
-            alignSelf: "flex-start",
+            display: "flex",
+            alignItems: "center",
+            // justifyContent: "center",
           }}
         >
-          <button type="button" className="btn-warning">
-            <AiFillCamera />
-            <input type="file" required onChange={(e) => addImage(e)} />
-          </button>
-        </div>{" "}
-        <span
-          style={{
-            alignSelf: "flex-start",
-            marginTop: "25px",
-            marginLeft: "25px",
-          }}
-        >
-          Add Photo
-        </span>
-      </div>
+          <div
+            className="upload"
+            style={{
+              marginTop: "10px",
+              fontSize: "25px",
+              alignSelf: "flex-start",
+            }}
+          >
+            <button type="button" className="btn-warning">
+              <AiFillCamera />
+              <input type="file" required onChange={(e) => addImage(e)} />
+            </button>
+          </div>{" "}
+          <span
+            style={{
+              alignSelf: "flex-start",
+              marginTop: "25px",
+              marginLeft: "25px",
+            }}
+          >
+            Add Photo
+          </span>
+        </div>
+      )}
       <div
         style={{
           marginTop: "15px",

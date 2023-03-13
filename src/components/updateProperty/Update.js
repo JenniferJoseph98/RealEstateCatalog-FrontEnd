@@ -1,54 +1,56 @@
 import React, { useEffect, useState } from "react";
-import Details from "../propertListingPage/Details";
-import "./add.css";
 
+import { useLocation } from "react-router-dom";
+import BasicInfo from "../Add Property/BasicInfo";
+import GeneralInfo from "../Add Property/GeneralInfo";
+import PropertyDetails from "../Add Property/PropertyDetails";
+import LocationInfo from "../Add Property/LocationInfo";
+import Details from "../propertListingPage/Details";
 import Sidebar from "../propertListingPage/Sidebar";
-import BasicInfo from "./BasicInfo";
-import PropertyDetails from "./PropertyDetails";
-import GeneralInfo from "./GeneralInfo";
-import LocationInfo from "./LocationInfo";
-function AddProperty() {
+
+function Update() {
+  const location = useLocation();
   const active = "#17a2b8";
   const normal = "";
   const [page, setPage] = useState(1);
-
+  useEffect(() => console.log(details));
+  const details = location.state;
   const [values, setValues] = useState({
-    property: "",
-    length: 0,
-    breadth: 0,
-    area: 0,
-    mobile: "",
-    negotiable: "",
-    price: "",
-    ownership: "",
-    propertyAge: "",
-    propApproved: "",
-    propDescription: "",
-    bankLoan: "",
-    areaUnit: "",
-    bhk: "",
-    floorNum: "",
-    attached: "",
-    westToilet: "",
-    furnished: "",
-    parking: "",
-    lift: "",
-    electricity: "",
-    facing: "",
-    name: "",
-    postedBy: "",
-    saleType: "",
-    package: "",
-    ppdPackage: "",
-    email: "",
-    city: "",
-    addArea: "",
-    pincode: "",
-    address: "",
-    landmark: "",
-    latitude: "",
-    longitude: "",
-    imageUrl: "",
+    property: details.property,
+    length: details.length,
+    breadth: details.breadth,
+    area: details.area,
+    mobile: details.mobile,
+    negotiable: details.negotiable,
+    price: details.price,
+    ownership: details.ownership,
+    propertyAge: details.propertyAge,
+    propApproved: details.propApproved,
+    propDescription: details.propDescription,
+    bankLoan: details.bankLoan,
+    areaUnit: details.areaUnit,
+    bhk: details.bhk,
+    floorNum: details.floorNum,
+    attached: details.attached,
+    westToilet: details.westToilet,
+    furnished: details.furnished,
+    parking: details.parking,
+    lift: details.lift,
+    electricity: details.electricity,
+    facing: details.facing,
+    name: details.name,
+    postedBy: details.postedBy,
+    saleType: details.saleType,
+    package: details.package,
+    ppdPackage: details.ppdPackage,
+    email: details.email,
+    city: details.city,
+    addArea: details.addArea,
+    pincode: details.pincode,
+    address: details.address,
+    landmark: details.landmark,
+    latitude: details.latitude,
+    longitude: details.longitude,
   });
 
   const nextStep = () => {
@@ -66,21 +68,6 @@ function AddProperty() {
   const handleInputData = (input) => (e) => {
     setValues({ ...values, [input]: e.target.value });
   };
-  function preViewFiles(file) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onloadend = () => {
-      setValues({ ...values, imageUrl: reader.result });
-      console.log(values.image);
-    };
-  }
-  const addImage = (e) => {
-    const file = e.target.files[0];
-    // getImage(file)
-    preViewFiles(file);
-  };
-  useEffect(() => console.log(page), [page]);
   return (
     <div className="container-fluid">
       <div className="row flex-nowrap">
@@ -88,9 +75,7 @@ function AddProperty() {
         <div className="col container" style={{ maxWidth: "80%" }}>
           <Details />
           <hr />
-          <h4 style={{ color: "gray", textAlign: "start" }}>
-            ADD NEW PROPERTY
-          </h4>
+          <h4 style={{ color: "gray", textAlign: "start" }}>Update Property</h4>
           <div
             style={{
               fontSize: "10px",
@@ -248,10 +233,9 @@ function AddProperty() {
                   <GeneralInfo
                     nextStep={nextStep}
                     prevStep={prevStep}
-                    addImage={addImage}
                     HandleFormData={handleInputData}
                     values={values}
-                    status="add"
+                    status="update"
                   />
                 );
 
@@ -262,8 +246,8 @@ function AddProperty() {
                     prevStep={prevStep}
                     HandleFormData={handleInputData}
                     values={values}
-                    status="add"
-                    propertyID="null"
+                    status="update"
+                    propertyID={details._id}
                   />
                 );
               default:
@@ -276,4 +260,4 @@ function AddProperty() {
   );
 }
 
-export default AddProperty;
+export default Update;
